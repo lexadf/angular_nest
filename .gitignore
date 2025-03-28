@@ -34,9 +34,14 @@ yarn-error.log
 testem.log
 /typings
 
+# envs
+/envs
+
 # System Files
 .DS_Store
 Thumbs.db
 
 .nx/cache
 .nx/workspace-data
+
+.angular

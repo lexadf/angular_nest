@@ -1,0 +1,42 @@
+<h2 class="grid-caption">Posts Table</h2>
+
+<dx-data-grid
+  [dataSource]="postsSig() ?? []"
+  keyExpr="id"
+  [allowColumnResizing]="true"
+  [showBorders]="true"
+  [showRowLines]="true"
+  [showColumnLines]="false"
+  [columnMinWidth]="60"
+  (onRowRemoved)="onRemove($event)"
+  (onSaved)="onSaved($event)"
+>
+  <dxo-paging [pageSize]="10"></dxo-paging>
+  <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true"> </dxo-editing>
+
+  <dxi-column dataField="id" caption="ID" [width]="60" [allowEditing]="false"></dxi-column>
+
+  <dxi-column dataField="userId" caption="User ID" [width]="80">
+    <ng-template dxTemplate="cell" let-data>
+      <div>
+        {{ data.value }}
+      </div>
+    </ng-template>
+  </dxi-column>
+
+  <dxi-column dataField="title" caption="Title">
+    <ng-template dxTemplate="cell" let-data>
+      <div>
+        {{ data.value }}
+      </div>
+    </ng-template>
+  </dxi-column>
+
+  <dxi-column dataField="body" caption="Body">
+    <ng-template dxTemplate="cell" let-data>
+      <div>
+        {{ data.value }}
+      </div>
+    </ng-template>
+  </dxi-column>
+</dx-data-grid>
