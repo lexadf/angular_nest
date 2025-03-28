@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DxDataGridModule } from 'devextreme-angular';
 import { Post, PostsService } from './posts.service';
 import { RowRemovedEvent, SavedEvent } from 'devextreme/ui/data_grid';
+import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 
 @Component({
   selector: 'app-posts',
