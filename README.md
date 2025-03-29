@@ -3,7 +3,7 @@
 1. Clone the repository:
 
 ```bash
-git clone <repository-url>
+git clone git@github.com:lexadf/angular_nest.git
 cd angular_nest
 ```
 
