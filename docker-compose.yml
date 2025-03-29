@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    ports:
+      - '4200:4200'
+    volumes:
+      - ./apps/ui:/app/apps/ui
+      - ./package.json:/app/package.json
+      - ./nx.json:/app/nx.json
+      - ./tsconfig.base.json:/app/tsconfig.base.json
+      - ./tsconfig.json:/app/tsconfig.json
+      - nx-cache:/root/.nx
+    environment:
+      - NODE_ENV=development
+      - NX_DAEMON=true
+      - API_URL=http://bff:3000
+    command: sh -c "nx daemon --start && nx serve ui --host 0.0.0.0 --disable-host-check --proxy-config proxy.conf.json"
+    depends_on:
+      - bff
+
+  bff:
+    build:
+      context: .
+      dockerfile: Dockerfile.bff
+    ports:
+      - '3000:3000'
+    volumes:
+      - ./apps/bff:/app/apps/bff
+      - ./package.json:/app/package.json
+      - ./nx.json:/app/nx.json
+      - ./tsconfig.base.json:/app/tsconfig.base.json
+      - ./tsconfig.json:/app/tsconfig.json
+      - nx-cache:/root/.nx
+    environment:
+      - NODE_ENV=development
+      - NX_DAEMON=true
+    command: sh -c "nx daemon --start && nx serve bff --host 0.0.0.0"
+
+volumes:
+  nx-cache:

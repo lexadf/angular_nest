@@ -9,10 +9,10 @@
   [showColumnLines]="false"
   [columnMinWidth]="60"
   (onRowRemoved)="onRemove($event)"
-  (onSaved)="onSaved($event)"
+  (onSaving)="onSaving($event)"
 >
-  <dxo-paging [pageSize]="10"></dxo-paging>
-  <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true"> </dxo-editing>
+  <dxo-paging [pageSize]="15"></dxo-paging>
+  <dxo-editing mode="row" [allowUpdating]="true" [allowAdding]="true" [allowDeleting]="true" [useIcons]="true"> </dxo-editing>
 
   <dxi-column dataField="id" caption="ID" [width]="60" [allowEditing]="false"></dxi-column>
 

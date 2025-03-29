@@ -1,0 +1,18 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+RUN apk add --no-cache python3 make g++
+
+COPY package*.json ./
+COPY nx.json ./
+COPY tsconfig*.json ./
+
+RUN npm install
+RUN npm install -g nx
+
+RUN mkdir -p /root/.nx && chmod -R 777 /root/.nx
+
+COPY . .
+
+EXPOSE 4200 

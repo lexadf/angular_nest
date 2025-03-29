@@ -4,7 +4,9 @@
   "license": "MIT",
   "scripts": {
     "start:dev": "nx run-many --target=serve --all",
-    "test": "nx run-many --target=test --all --watch"
+    "test": "nx run-many --target=test --all --watch",
+    "start:ui": "nx run ui:serve",
+    "start:bff": "nx run bff:serve"
   },
   "private": true,
   "devDependencies": {

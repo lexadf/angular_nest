@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Post, PostsService } from './posts.service';
-import { RowRemovedEvent, SavedEvent } from 'devextreme/ui/data_grid';
+import { RowRemovedEvent, SavingEvent } from 'devextreme/ui/data_grid';
 import { DxDataGridModule } from 'devextreme-angular/ui/data-grid';
 
 @Component({
@@ -23,12 +23,21 @@ export class PostsComponent implements OnInit {
     this.postsService.loadPosts();
   }
 
-  onSaved(event: SavedEvent<Post>) {
+  onSaving(event: SavingEvent<Post>) {
+    event.cancel = true;
     const post = event.changes[0]?.data;
-    if (typeof post.id === 'number') {
-      this.postsService.updatePost(post);
-    } else {
+    if (!post) return;
+
+    if (event.changes[0].type === 'insert') {
       this.postsService.addPost(post);
+      event.component.cancelEditData();
+      return;
+    }
+
+    if (event.changes[0].type === 'update' && typeof post.id === 'number') {
+      this.postsService.updatePost(post);
+      event.component.cancelEditData();
+      return;
     }
   }
 
